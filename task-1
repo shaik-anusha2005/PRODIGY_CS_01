@@ -1,0 +1,29 @@
+def caesar_encrypt(message, shift):
+    encrypted_message = ""
+    for char in message:
+        if char.isalpha():  # Check if character is a letter
+            shift_base = 65 if char.isupper() else 97  # ASCII base for upper and lower case
+            encrypted_char = chr((ord(char) + shift - shift_base) % 26 + shift_base)
+            encrypted_message += encrypted_char
+        else:
+            encrypted_message += char  # Non-alphabetic characters are not changed
+    return encrypted_message
+
+def caesar_decrypt(encrypted_message, shift):
+    return caesar_encrypt(encrypted_message, -shift)  # Decrypting is just encrypting with negative shift
+
+def main():
+    print("Caesar Cipher Encryption/Decryption")
+    message = input("Enter your message: ")
+    shift = int(input("Enter shift value (positive for encryption, negative for decryption): "))
+    
+    # Determine if we are encrypting or decrypting
+    if shift > 0:
+        encrypted_message = caesar_encrypt(message, shift)
+        print("Encrypted message:", encrypted_message)
+    else:
+        decrypted_message = caesar_decrypt(message, abs(shift))
+        print("Decrypted message:", decrypted_message)
+
+if __name__ == "__main__":
+    main()
